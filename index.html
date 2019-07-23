@@ -4,35 +4,54 @@
     <meta charset="utf-8">
     <title>Racing Game</title>
   </head>
+  
   <body>
     
-    <h1>Racing Game!</h1>
+    <div class="container">
+      <h1>Racing Game!</h1>
+      <h2>Car 1 Settings</h2>
+      <p>
+        <label for="name1">Name</label>
+        <input id="name1" type="text" name="" value="">
+      </p>
+      <p>
+        <label for="max-speed1">Max Speed</label>
+        <input id="max-speed1" type="text" name="" value="">
+      </p>
+      <p>
+        <label for="curve-speed1">Curve Speed</label>
+        <input id="curve-speed1" type="text" name="" value="">
+      </p>
+      <h2>Car 2 Settings</h2>
+      <p>
+        <label for="name2">Name</label>
+        <input id="name2" type="text" name="" value="">
+      </p>
+      <p>
+        <label for="max-speed2">Max Speed</label>
+        <input id="max-speed2" type="text" name="" value="">
+      </p>
+      <p>
+        <label for="curve-speed2">Curve Speed</label>
+        <input id="curve-speed2" type="text" name="" value="">
+      </p>
+      <h2>Pick your track</h2>
+      <p>
+        <label for="straight-distance">Straight Distance</label>
+        <input id="straight-distance" type="text" name="" value="">
+      </p>
+      <p>
+        <label for="curve-distance">Curve Distance</label>
+        <input id="curve-distance" type="text" name="" value="">
+      </p>
+      
+      <div class="">
+        <button id="calculate" type="button" name="button">Race!</button>
+      </div>
+      <div id="winner-box">
+      </div>
+    </div>
     
-    <h2>Pick your car 1</h2>
-    
-    <label for="max-speed">Max Speed</label>
-    <input id="max-speed" type="text" name="" value="">
-    <label for="curve-speed">Curve Speed</label>
-    <input id="curve-speed" type="text" name="" value="">
-    
-    <!-- <h2>Pick your car 2</h2>
-    
-    <label for="max-speed2">Max Speed</label>
-    <input id="max-speed2" type="text" name="" value="">
-    <label for="curve-speed2">Curve Speed</label>
-    <input id="curve-speed2" type="text" name="" value=""> -->
-    
-    <h2>Pick your track</h2>
-    
-    <label for="straight-distance">Straight Distance</label>
-    <input id="straight-distance" type="text" name="" value="">
-    <label for="curve-distance">Curve Distance</label>
-    <input id="curve-distance" type="text" name="" value="">
-    
-    <br>
-    
-    <button id="calculate" type="button" name="button">Calculate</button>
-
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>

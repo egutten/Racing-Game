@@ -1,6 +1,7 @@
 function Car(maxSpeed, curveSpeed){
   this.maxSpeed = maxSpeed;
   this.curveSpeed = curveSpeed;
+  this.name = name;
 }
 
 function Track(straightDistance, curveDistance){
@@ -9,20 +10,30 @@ function Track(straightDistance, curveDistance){
 }
 
 var track = new Track();
-var car = new Car();
+var car1 = new Car();
+var car2 = new Car();
 
 carConfig();
 trackConfig();
-calculateTime();
+race();
 
 function carConfig(){
-  var maxSpeedInput = document.querySelector("#max-speed");
+  carSet(car1, "#max-speed1", "#curve-speed1", "#name1");
+  carSet(car2, "#max-speed2", "#curve-speed2", "#name2");
+}
+
+function carSet(car, input_a, input_b, input_c) {
+  var maxSpeedInput = document.querySelector(input_a);
   maxSpeedInput.addEventListener("change", function(){
     car.maxSpeed = Number(maxSpeedInput.value);
   });
-  var curveSpeedInput = document.querySelector("#curve-speed");
+  var curveSpeedInput = document.querySelector(input_b);
   curveSpeedInput.addEventListener("change", function(){
     car.curveSpeed = Number(curveSpeedInput.value);
+  });
+  var nameInput = document.querySelector(input_c);
+  nameInput.addEventListener("change", function(){
+    car.name = nameInput.value;
   });
 }
 
@@ -37,12 +48,28 @@ function trackConfig(){
   });
 }
 
-function calculateTime(){
-  var calculate = document.querySelector("#calculate");
-  calculate.addEventListener("click", function(){
+function calculateTime(car){
     var straightTime = track.straightDistance / car.maxSpeed;
     var curveTime = track.curveDistance/ car.curveSpeed;
     var totalTime = straightTime + curveTime;
-    console.log (Math.round(totalTime));
+    return Math.round(totalTime);
+}
+
+function compareCars(){
+  var winnerBox = document.querySelector("#winner-box")
+  var car1Time = calculateTime(car1);
+  var car2Time = calculateTime(car2);
+  if (Math.min(car1Time, car2Time) === car1Time) {
+    winnerBox.innerHTML = "And the winner is... " + car1.name + "!";
+  } else {
+    winnerBox.innerHTML = "And the winner is... " + car2.name + "!";
+  }
+}
+
+function race(){
+  var calculate = document.querySelector("#calculate");
+  calculate.addEventListener("click", function(){
+      compareCars();
+      
   });
 }
