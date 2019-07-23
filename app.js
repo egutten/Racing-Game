@@ -13,11 +13,7 @@ var car = new Car();
 
 carConfig();
 trackConfig();
-
-var calculate = document.querySelector("#calculate");
-calculate.addEventListener("click", function(){
-  calculateTime();
-});
+calculateTime();
 
 function carConfig(){
   var maxSpeedInput = document.querySelector("#max-speed");
@@ -42,8 +38,11 @@ function trackConfig(){
 }
 
 function calculateTime(){
-  var straightTime = track.straightDistance / car.maxSpeed;
-  var curveTime = track.curveDistance/ car.curveSpeed;
-  var totalTime = straightTime + curveTime;
-  console.log (Math.round(totalTime));
+  var calculate = document.querySelector("#calculate");
+  calculate.addEventListener("click", function(){
+    var straightTime = track.straightDistance / car.maxSpeed;
+    var curveTime = track.curveDistance/ car.curveSpeed;
+    var totalTime = straightTime + curveTime;
+    console.log (Math.round(totalTime));
+  });
 }
