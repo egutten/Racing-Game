@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Racing Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Faster+One|Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
   </head>
   
   <body>
-    
+    <h1>Racing Game!</h1>
     <div class="container">
-      <h1>Racing Game!</h1>
       <h2>Car 1 Settings</h2>
       <p>
         <label for="name1">Name</label>
@@ -45,8 +46,13 @@
         <input id="curve-distance" type="text" name="" value="">
       </p>
       
-      <div class="">
-        <button id="calculate" type="button" name="button">Race!</button>
+      <div id="button-box">
+        <button id="race" type="button" name="button">
+          Race!
+        </button>
+        <button class="race-again" type="button" name="button">
+          Race Again!
+        </button>
       </div>
       <div id="winner-box">
       </div>
