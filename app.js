@@ -9,18 +9,24 @@ function Track(straightDistance, curveDistance){
 }
 
 var track = new Track();
-var car = new Car();
+var car1 = new Car();
+var car2 = new Car();
 
 carConfig();
 trackConfig();
-calculateTime();
+race();
 
 function carConfig(){
-  var maxSpeedInput = document.querySelector("#max-speed");
+  bothCars(car1, "#max-speed1", "#curve-speed1");
+  bothCars(car2, "#max-speed2", "#curve-speed2");
+}
+
+function bothCars(car, input_a, input_b) {
+  var maxSpeedInput = document.querySelector(input_a);
   maxSpeedInput.addEventListener("change", function(){
     car.maxSpeed = Number(maxSpeedInput.value);
   });
-  var curveSpeedInput = document.querySelector("#curve-speed");
+  var curveSpeedInput = document.querySelector(input_b);
   curveSpeedInput.addEventListener("change", function(){
     car.curveSpeed = Number(curveSpeedInput.value);
   });
@@ -37,12 +43,23 @@ function trackConfig(){
   });
 }
 
-function calculateTime(){
-  var calculate = document.querySelector("#calculate");
-  calculate.addEventListener("click", function(){
+function calculateTime(car){
     var straightTime = track.straightDistance / car.maxSpeed;
     var curveTime = track.curveDistance/ car.curveSpeed;
     var totalTime = straightTime + curveTime;
-    console.log (Math.round(totalTime));
+    return Math.round(totalTime);
+}
+
+function compareCars(){
+  var car1Time = calculateTime(car1);
+  var car2Time = calculateTime(car2);
+  var winner = Math.min(car1Time, car2Time);
+  console.log(winner);
+}
+
+function race(){
+  var calculate = document.querySelector("#calculate");
+  calculate.addEventListener("click", function(){
+      compareCars();
   });
 }
