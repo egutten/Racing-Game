@@ -1,4 +1,4 @@
-function Car(maxSpeed, curveSpeed){
+function Obj(maxSpeed, curveSpeed){
   this.maxSpeed = maxSpeed;
   this.curveSpeed = curveSpeed;
   this.name = name;
@@ -7,36 +7,56 @@ function Car(maxSpeed, curveSpeed){
 function Track(straightDistance, curveDistance){
   this.straightDistance = straightDistance;
   this.curveDistance = curveDistance;
+  this.race = function race(obj1, obj2){
+    var race = document.querySelector("#race");
+    race.addEventListener("click", function(){
+        compareObj(obj1, obj2);
+        document.querySelector(".new-race").classList.add("reveal");
+    });
+  };
+  this.newRace = function newRace(obj1, obj2) {
+    var newRace = document.querySelector(".new-race");
+    var input = document.querySelectorAll("input[type='text']");
+    newRace.addEventListener("click", function(){
+      resetObj(obj1, obj2);
+      resetTrack();
+      input.forEach (function(i){
+        i.value = "";
+      });
+      document.querySelector("#winner-box").innerHTML = "";
+      newRace.classList.remove("reveal");
+    });
+  };
 }
 
 var track = new Track();
-var car1 = new Car();
-var car2 = new Car();
+var car1 = new Obj();
+var car2 = new Obj();
 
-carConfig();
+objConfig(car1, car2);
 trackConfig();
-race();
-raceAgain();
+track.race(car1, car2);
+track.newRace(car1, car2);
 
-// Setting the car's specks based on what the user enters into the inputs
-function carSet(car, input_a, input_b, input_c) {
+// Setting the obj's specks based on what the user enters into the inputs
+function objSet(obj, input_a, input_b, input_c) {
   var maxSpeedInput = document.querySelector(input_a);
   maxSpeedInput.addEventListener("change", function(){
-    car.maxSpeed = Number(maxSpeedInput.value);
+    obj.maxSpeed = Number(maxSpeedInput.value);
   });
   var curveSpeedInput = document.querySelector(input_b);
   curveSpeedInput.addEventListener("change", function(){
-    car.curveSpeed = Number(curveSpeedInput.value);
+    obj.curveSpeed = Number(curveSpeedInput.value);
   });
   var nameInput = document.querySelector(input_c);
   nameInput.addEventListener("change", function(){
-    car.name = nameInput.value;
+    obj.name = nameInput.value;
   });
 }
 
-function carConfig(){
-  carSet(car1, "#max-speed1", "#curve-speed1", "#name1");
-  carSet(car2, "#max-speed2", "#curve-speed2", "#name2");
+function objConfig(obj1, obj2){
+  objSet(obj1, "#max-speed1", "#curve-speed1", "#name1");
+  objSet(obj2, "#max-speed2", "#curve-speed2", "#name2");
 }
 
 // Setting the track's specs based on what the user enters into the inputs
@@ -51,60 +71,40 @@ function trackConfig(){
   });
 }
 
-// Determine how long it takes each car to travel the track based on specs
-function calculateTime(car){
-    var straightTime = track.straightDistance / car.maxSpeed;
-    var curveTime = track.curveDistance/ car.curveSpeed;
+// Determine how long it takes each obj to travel the track based on specs
+function calculateTime(obj){
+    var straightTime = track.straightDistance / obj.maxSpeed;
+    var curveTime = track.curveDistance/ obj.curveSpeed;
     var totalTime = straightTime + curveTime;
-    return Math.round(totalTime);
+    return totalTime;
 }
 
-// Compare the results of each car against each other and generate a winner banner
-function compareCars(){
+// Compare the results of each obj against each other and generate a winner banner
+function compareObj(obj1, obj2){
   var winnerBox = document.querySelector("#winner-box")
-  var car1Time = calculateTime(car1);
-  var car2Time = calculateTime(car2);
-  if (car1Time && car2Time && car1Time === car2Time) {
+  var obj1Time = calculateTime(obj1);
+  var obj2Time = calculateTime(obj2);
+  console.log(obj1Time, obj2Time);
+  if (obj1Time && obj2Time && obj1Time === obj2Time) {
     winnerBox.innerHTML = "It's a tie!";
-  } else if (car1Time && car2Time && Math.min(car1Time, car2Time) === car1Time) {
-    winnerBox.innerHTML = "And the winner is... " + car1.name + "!";
-  } else if (car1Time && car2Time && Math.min(car1Time, car2Time) === car2Time) {
-    winnerBox.innerHTML = "And the winner is... " + car2.name + "!";
+  } else if (obj1Time && obj2Time && Math.min(obj1Time, obj2Time) === obj1Time) {
+    winnerBox.innerHTML = "And the winner is... " + obj1.name + "!";
+  } else if (obj1Time && obj2Time && Math.min(obj1Time, obj2Time) === obj2Time) {
+    winnerBox.innerHTML = "And the winner is... " + obj2.name + "!";
   } 
 }
 
-// Button that triggers the time calculation and comparison functions above
-function race(){
-  var race = document.querySelector("#race");
-  race.addEventListener("click", function(){
-      compareCars();
-      document.querySelector(".race-again").classList.add("reveal");
-  });
-}
-
-// Reset functions to start again
-function resetCar(car){
-  car.maxSpeed = "";
-  car.curveSpeed = "";
-  car.name = "";
+// Reset functions
+function resetObj(obj1, obj2){
+  obj1.maxSpeed = "";
+  obj1.curveSpeed = "";
+  obj1.name = "";
+  obj2.maxSpeed = "";
+  obj2.curveSpeed = "";
+  obj2.name = "";
 }
 
 function resetTrack(){
   track.straightDistance = "";
   track.curveDistance = "";
-}
-
-function raceAgain(){
-  var raceAgain = document.querySelector(".race-again");
-  var input = document.querySelectorAll("input[type='text']");
-  raceAgain.addEventListener("click", function(){
-    resetCar(car1);
-    resetCar(car2);
-    resetTrack();
-    input.forEach (function(i){
-      i.value = "";
-    });
-    document.querySelector("#winner-box").innerHTML = "";
-    raceAgain.classList.remove("reveal");
-  });
 }

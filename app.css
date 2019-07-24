@@ -41,7 +41,7 @@ input[type=text]:focus {
   width: 400px;
 }
 
-.race-again {
+.new-race {
   display: none;
 }
 
@@ -49,7 +49,7 @@ input[type=text]:focus {
   display: block;
 }
 
-#race, #race-again {
+#race {
   width: 100px;
 }
 
